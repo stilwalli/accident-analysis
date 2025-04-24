@@ -1,0 +1,10 @@
+<svg width="200" height="100" xmlns="http://www.w3.org/2000/svg">
+  <path d="M20,70 Q40,80 100,80 Q160,80 180,70 L180,60 Q160,50 100,50 Q40,50 20,60 Z" fill="#0066cc" />
+  <path d="M50,50 Q75,30 100,30 Q125,30 150,50" fill="none" stroke="#0066cc" stroke-width="4" />
+  <circle cx="50" cy="80" r="10" fill="#333" />
+  <circle cx="150" cy="80" r="10" fill="#333" />
+  <circle cx="50" cy="80" r="5" fill="#777" />
+  <circle cx="150" cy="80" r="5" fill="#777" />
+  <text x="100" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="14" fill="white">TURBO</text>
+  <text x="100" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="14" fill="#333">MOTORS</text>
+</svg>

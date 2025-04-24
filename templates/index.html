@@ -1,0 +1,97 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Analysis App</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <img src="/static/img/car-logo.png" alt="Car Company Logo" class="logo">
+                <h2>Video Analysis with Vertex AI</h2>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Left Partition - Static Content -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h4>Sample Video Analysis</h4>
+                    </div>
+                    <div class="card-body">
+                        <video width="100%" controls>
+                            <source src="/static/demo/before-car.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="mt-3">
+                            <h5>Analysis Results:</h5>
+                            <div class="analysis-results">
+Body Panels: Looking at the front view, the body panels appear to be smooth and aligned. I don't see any obvious scratches, dents, paint chips, or misalignments on the visible portions of the front bumper, hood, and front quarter panels.
+
+Glass: The windshield is clearly visible and looks intact, with no apparent cracks or chips. The side windows are partially visible and also seem to be in good condition.
+
+Lights: The headlights and turn signals are clearly visible and appear to be intact, with no visible cracks or damage to the lenses. I don't see any condensation inside the housings from this angle.
+
+Wheels and Tires: The front wheels are clearly visible. The wheels appear to be in good condition from this angle, without any obvious curb rash or damage. The tire tread looks to be adequate. I don't see any visible damage to the tire sidewalls.
+
+Trim and Details: The front bumper trim, Honda badge, and grille are all present and appear to be in good condition. The side mirrors are partially visible and seem okay.
+
+Overall Exterior Condition (based on the visible portion): From this front view, the vehicle appears to be in good exterior condition. I don't observe any significant damage to the body panels, glass, lights, wheels, or trim.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Partition - Upload & Results -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Upload Your Video</h4>
+                    </div>
+                    <div class="card-body">
+                        {% if error_message %}
+                            <div class="alert alert-warning">{{ error_message }}</div>
+                        {% endif %}
+                        
+                        <form action="/upload" method="post" enctype="multipart/form-data" id="uploadForm">
+                            <div class="mb-3">
+                                <label for="video" class="form-label">Upload a video for analysis</label>
+                                <input class="form-control" type="file" id="video" name="video" accept="video/*" required>
+                                <div class="form-text">Supported formats: MP4, AVI, MOV, WMV, MKV (Max size: 16MB)</div>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Analyze Video</button>
+                            </div>
+                        </form>
+                        
+                        <!-- Analysis results will appear here after upload -->
+                        <div id="uploadResults" class="mt-4" style="{% if not show_results %}display: none;{% endif %}">
+                            <h5>Your Video:</h5>
+                            {% if filename %}
+                            <video width="100%" controls>
+                                <source src="/static/uploads/{{ filename }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <p class="mt-2">Filename: {{ filename }}</p>
+                            
+                            <h5>Analysis:</h5>
+                            <div class="analysis-results">
+                                {{ analysis | safe }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
